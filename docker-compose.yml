@@ -3,5 +3,5 @@
 
 web:
     build: .
-    ports:
-        - '8480'
+    environment:
+        VIRTUAL_HOST: photon-lightswitch.sammarks.me
