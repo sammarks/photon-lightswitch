@@ -1,0 +1,7 @@
+# This file assumes you've got the nginx proxy Docker container
+# already running and listening to Docker.
+
+web:
+    build: .
+    environment:
+        VIRTUAL_HOST: photon-lightswitch.sammarks.me
