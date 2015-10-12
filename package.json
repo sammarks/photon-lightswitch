@@ -1,0 +1,10 @@
+{
+  "name": "photon-lightswitch",
+  "version": "0.0.1",
+  "start": "node server.js",
+  "dependencies": {
+    "moment": "^2.10.6",
+    "moment-timezone": "^0.4.1",
+    "unirest": "^0.4.2"
+  }
+}
