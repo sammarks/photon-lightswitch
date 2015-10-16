@@ -60,9 +60,9 @@ wss.sendCurrentConditions = function() {
 			console.log("Sunset: %s", sunset);
 			console.log('-----------------');
 			if (current > sunrise && current < sunset) {
-				this.broadcast('N');
+				wss.broadcast('N');
 			} else {
-				this.broadcast('Y');
+				wss.broadcast('Y');
 			}
 		});
 
