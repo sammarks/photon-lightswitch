@@ -87,4 +87,4 @@ wss.on('connection', function(ws) {
 
 });
 
-setInterval(wss.sendCurrentConditions, 60000 * 10); // Send the current conditions every 10 mins.
+setInterval(wss.sendCurrentConditions, 10000); // Send the current conditions every 10 seconds.
