@@ -43,7 +43,7 @@ wss.broadcast = function(data) {
 wss.sendCurrentConditions = function() {
 
 	// If we have no clients, don't do anything.
-	if (!this.clients || this.clients.length <= 0) {
+	if (!wss.clients || wss.clients.length <= 0) {
 		console.log('No clients.');
 		return;
 	}
