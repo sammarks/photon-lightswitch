@@ -13,10 +13,7 @@ Alexa.handle = function (request, response) {
 	if (!request.body ||
 		!request.body['request'] ||
 		!request.body['request']['intent'] ||
-		!request.body['request']['intent']['name'] ||
-		!request.body['request']['intent']['slots'] ||
-		!request.body['request']['intent']['slots']['State'] ||
-		!request.body['request']['intent']['slots']['State']['value']) {
+		!request.body['request']['intent']['name']) {
 		response.status(400).end();
 		return;
 	}
