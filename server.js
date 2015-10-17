@@ -11,18 +11,18 @@ console.log('Starting...');
 
 // Configure sunset.
 sunset.config.callbacks.sunrise = function () {
-	wss.broadcast('N');
+	wss.broadcast('!N');
 }
 sunset.config.callbacks.sunset = function () {
-	wss.broadcast('Y');
+	wss.broadcast('!Y');
 }
 
 // Configure alexa.
 alexa.config.callbacks.on = function () {
-	wss.broadcast('F');
+	wss.broadcast('!F');
 }
 alexa.config.callbacks.off = function () {
-	wss.broadcast('O');
+	wss.broadcast('!O');
 }
 
 app.use(express.static(__dirname + '/'));
