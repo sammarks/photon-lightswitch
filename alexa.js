@@ -21,21 +21,32 @@ Alexa.handle = function (request, response) {
 		return;
 	}
 	var name = request.body['request']['intent']['name'];
+	var output = 'OK';
 	if (name == 'Lightswitch') {
 		var state = request.body['request']['intent']['slots']['State']['value'];
-		if (state == 'On') {
+		if (state == 'on') {
 			Alexa.config.callbacks.on;
-		} else if (state == 'Off' || state == 'Out') {
+			output = 'Lights on.';
+		} else if (state == 'off' || state == 'out') {
 			Alexa.config.callbacks.off;
+			output = 'Lights out.';
 		}
 	} else if (name == 'LightswitchGoodmorning') {
 		Alexa.config.callbacks.on;
+		output = 'Good morning!';
 	} else if (name == 'LightswitchGoodnight') {
 		Alexa.config.callbacks.off;
+		output = 'Goodnight!';
 	}
 	response.json({
 		version: '1.0',
-		shouldEndSession: true
+		response: {
+			shouldEndSession: true,
+			outputSpeech: {
+				type: 'PlainText',
+				text: output
+			}
+		}
 	});
 };
 
