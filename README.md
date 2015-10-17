@@ -14,8 +14,8 @@ Possible ideas I have for expansion:
 	stormy).
 - [ ] Check to see if my phone is connected to the same wireless network as the lights
 	(on device, turns the lights out when my phone is not in the area).
-- [+] Update the application to use WebSockets [using this repository](https://github.com/hpssjellis/Particle-Spark-Core-Photon-Websocket-Hack).
-- [+] Create an Amazon Echo app to support turning the lights on and off by speaking to the Echo.
+- [x] Update the application to use WebSockets [using this repository](https://github.com/hpssjellis/Particle-Spark-Core-Photon-Websocket-Hack).
+- [x] Create an Amazon Echo app to support turning the lights on and off by speaking to the Echo.
 
 ## Device Codes
 
