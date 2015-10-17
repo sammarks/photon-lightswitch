@@ -5,3 +5,5 @@ web:
     build: .
     environment:
         VIRTUAL_HOST: photon-lightswitch.sammarks.me
+    ports:
+    	- 8480 # Expose to make the TCP client happy.
