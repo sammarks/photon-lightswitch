@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "start": "node server.js",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",

@@ -1,0 +1,13 @@
+Lightswitch turn my lights {State}
+Lightswitch lights {State}
+Lightswitch turn {State}
+Lightswitch switch {State}
+Lightswitch {State}
+
+LightswitchGoodmorning good morning
+LightswitchGoodmorning morning
+
+LightswitchGoodnight good night
+LightswitchGoodnight goodnight
+LightswitchGoodnight night
+LightswitchGoodnight im going to bed

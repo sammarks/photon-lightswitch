@@ -1,0 +1,21 @@
+{
+	"intents": [
+		{
+			"intent": "Lightswitch",
+			"slots": [
+				{
+					"name": "State",
+					"type": "LIGHT_STATES"
+				}
+			]
+		},
+		{
+			"intent": "LightswitchGoodnight",
+			"slots": []
+		},
+		{
+			"intent": "LightswitchGoodmorning",
+			"slots": []
+		}
+	]
+}

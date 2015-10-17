@@ -16,3 +16,10 @@ Possible ideas I have for expansion:
 	(on device, turns the lights out when my phone is not in the area).
 - Update the application to use WebSockets [using this repository](https://github.com/hpssjellis/Particle-Spark-Core-Photon-Websocket-Hack).
 - Create an Amazon Echo app to support turning the lights on and off by speaking to the Echo.
+
+## Device Codes
+
+- *Y*: Lights on (submissive)
+- *N*: Lights off (submissive)
+- *F*: Lights on (forceful)
+- *O*: Lights off (forceful)
