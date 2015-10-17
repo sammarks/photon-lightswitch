@@ -22,17 +22,17 @@ Alexa.handle = function (request, response) {
 	if (name == 'Lightswitch') {
 		var state = request.body['request']['intent']['slots']['State']['value'];
 		if (state == 'on') {
-			this.config.callbacks.on();
+			Alexa.config.callbacks.on();
 			output = 'Lights on.';
 		} else if (state == 'off' || state == 'out') {
-			this.config.callbacks.off();
+			Alexa.config.callbacks.off();
 			output = 'Lights out.';
 		}
 	} else if (name == 'LightswitchGoodmorning') {
-		this.config.callbacks.on();
+		Alexa.config.callbacks.on();
 		output = 'Good morning!';
 	} else if (name == 'LightswitchGoodnight') {
-		this.config.callbacks.off();
+		Alexa.config.callbacks.off();
 		output = 'Goodnight!';
 	}
 	response.json({

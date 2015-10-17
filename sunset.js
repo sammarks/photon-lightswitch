@@ -31,11 +31,9 @@ sunset.config = {
 
 sunset.restart = function () {
 
-	var sunset = this;
-
 	// Get the sunrise and sunset for the current location.
 	unirest.get('http://api.sunrise-sunset.org/json')
-		.query({ lat: this.config.latitude, lng: this.config.longitude })
+		.query({ lat: sunset.config.latitude, lng: sunset.config.longitude })
 		.end(function (response) {
 
 			// Make sure we have a valid result.
@@ -76,22 +74,22 @@ sunset.restart = function () {
 
 sunset.sunrise = function () {
 	var secondsToSunset = internal.sunset.unix() - internal.currentTime().unix();
-	setTimeout(this.sunset, secondsToSunset * 1000);
-	this.config.callbacks.sunrise();
+	setTimeout(sunset.sunset, secondsToSunset * 1000);
+	sunset.config.callbacks.sunrise();
 };
 
 sunset.sunset = function () {
 	var secondsToTomorrow = internal.tomorrow.unix() - internal.currentTime().unix();
-	setTimeout(this.restart, secondsToTomorrow * 1000);
-	this.config.callbacks.sunset();
+	setTimeout(sunset.restart, secondsToTomorrow * 1000);
+	sunset.config.callbacks.sunset();
 };
 
 sunset.current = function () {
 	var current = internal.currentTime();
 	if (current > internal.sunrise && current < internal.sunset) {
-		this.config.callbacks.sunrise();
+		sunset.config.callbacks.sunrise();
 	} else {
-		this.config.callbacks.sunset();
+		sunset.config.callbacks.sunset();
 	}
 };
 
