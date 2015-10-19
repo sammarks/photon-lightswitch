@@ -24,3 +24,4 @@ Possible ideas I have for expansion:
 - *N*: Lights off (submissive)
 - *F*: Lights on (forceful)
 - *O*: Lights off (forceful)
+- *P*: Ping (should be sent every 10 seconds from the server)
