@@ -58,14 +58,13 @@ wss.on('connection', function(ws) {
 	// Send the current sunset status.
 	sunset.current();
 	
-	ws.on('message', function(message) {
-		if (message == 'P') {
-			wss.broadcast('!P');
-		}
-	});
+	var id = setInterval(function() {
+		ws.send('!P', function() {});
+	}, 10000);
 
 	ws.on('close', function() {
 		console.log('Client disconnected.');
+		clearInterval(id);
 	});
 
 });
