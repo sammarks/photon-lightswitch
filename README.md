@@ -10,7 +10,7 @@ as possible.
 
 Possible ideas I have for expansion:
 
-- [ ] Send a ping to the websocket connection every 10 seconds to verify that the connection is still alive.
+- [x] Send a ping to the websocket connection every 10 seconds to verify that the connection is still alive.
 - [ ] Check cloud conditions in the area (turn the lights on when it's cloudy or
 	stormy).
 - [ ] Check to see if my phone is connected to the same wireless network as the lights
