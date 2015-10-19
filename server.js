@@ -57,6 +57,12 @@ wss.on('connection', function(ws) {
 
 	// Send the current sunset status.
 	sunset.current();
+	
+	ws.on('message', function(message) {
+		if (message == 'P') {
+			wss.broadcast('!P');
+		}
+	});
 
 	ws.on('close', function() {
 		console.log('Client disconnected.');
