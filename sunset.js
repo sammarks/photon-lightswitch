@@ -20,9 +20,9 @@ internal.currentTime = function () {
 }
 
 sunset.config = {
-	latitude: 38.045407, // Downtown Lexington, KY
-	longitude: -84.4992567,
-	timezone: 'America/Kentucky/Louisville',
+	latitude: 0,
+	longitude: 0,
+	timezone: '',
 	callbacks: {
 		sunrise: function() {},
 		sunset: function() {}

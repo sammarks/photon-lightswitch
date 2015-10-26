@@ -9,7 +9,18 @@ var port = 8480;
 
 console.log('Starting...');
 
+// Global Configuration
+var config = {
+	latitude: process.env.LATITUDE,
+	longitude: process.env.LONGITUDE,
+	timezone: process.env.TIMEZONE,
+	forecast_io: process.env.FORECAST_IO_KEY
+};
+
 // Configure sunset.
+sunset.config.latitude = config.latitude;
+sunset.config.longitude = config.longitude;
+sunset.config.timezone = config.timezone;
 sunset.config.callbacks.sunrise = function () {
 	wss.broadcast('!N');
 }
@@ -25,6 +36,7 @@ alexa.config.callbacks.off = function () {
 	wss.broadcast('!O');
 }
 
+// Configure the web service.
 app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
 
@@ -69,5 +81,5 @@ wss.on('connection', function(ws) {
 
 });
 
-// Begin sunset.
+// Initialize services.
 sunset.restart();
