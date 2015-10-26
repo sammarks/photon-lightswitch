@@ -84,7 +84,7 @@ wss.on('connection', function(ws) {
 
 	// Send the current sunset and weather status.
 	sunset.current();
-	weather.checkForecast();
+	weather.checkForecast(true);
 	
 	var id = setInterval(function() {
 		ws.send('!P', function() {});

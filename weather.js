@@ -23,11 +23,11 @@ Weather.initialize = function (check) {
 	Weather.previousState = -1;
 	setInterval(Weather.checkForecast, 1000 * 60 * 10); // Check the forecast every 10 minutes.
 	if (check) {
-		Weather.checkForecast();
+		Weather.checkForecast(true);
 	}
 };
 
-Weather.checkForecast = function () {
+Weather.checkForecast = function (force) {
 	console.log('[weather] Checking Forecast');
 	Weather.forecast.get([Weather.config.latitude, Weather.config.longitude], function (err, weather) {
 		if (err) {
@@ -37,7 +37,7 @@ Weather.checkForecast = function () {
 			typeof(weather['currently']['cloudCover']) !== 'undefined') {
 			console.log('Cloud Cover: %s', weather['currently']['cloudCover']);
 			var on = weather['currently']['cloudCover'] > Weather.config.cloud_cover_threshold;
-			if (on != Weather.previousState) {
+			if (on != Weather.previousState || force) {
 				Weather.previousState = on;
 				Weather.config.callbacks.statusChanged(on);
 			}
