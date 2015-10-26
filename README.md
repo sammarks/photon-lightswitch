@@ -25,3 +25,13 @@ Possible ideas I have for expansion:
 - *F*: Lights on (forceful)
 - *O*: Lights off (forceful)
 - *P*: Ping (should be sent every 10 seconds from the server)
+
+## Device Firmware
+
+I have added the firmware to this repository (`firmware.ino`). The firmware was written
+for a Particle Photon with the following configuration:
+
+- Pin 3 is connected to a button, with the ground going to ground (it's a pullup resistor).
+- Pin 5 is connected to a solid state relay, which controls the lights. The positive
+	end of the solid state relay goes into this data port, with the ground going to the
+	ground connection on the photon.
