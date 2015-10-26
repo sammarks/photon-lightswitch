@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var sunset = require('./sunset');
 var alexa = require('./alexa');
+var weather = require('./weather');
 var port = 8480;
 
 console.log('Starting...');
@@ -26,6 +27,20 @@ sunset.config.callbacks.sunrise = function () {
 }
 sunset.config.callbacks.sunset = function () {
 	wss.broadcast('!Y');
+}
+
+// Configure weather.
+weather.config.latitude = config.latitude;
+weather.config.longitude = config.longitude;
+weather.config.timezone = config.timezone;
+weather.config.forecast_io = config.forecast_io;
+weather.config.callbacks.statusChanged = function (on) {
+	if (sunset.getCurrent()) return; // If the lights are supposed to be on, leave them on.
+	if (on) {
+		wss.broadcast('!Y');
+	} else {
+		wss.broadcast('!N');
+	}
 }
 
 // Configure alexa.
@@ -67,8 +82,9 @@ wss.on('connection', function(ws) {
 
 	console.log('Client connected.');
 
-	// Send the current sunset status.
+	// Send the current sunset and weather status.
 	sunset.current();
+	weather.checkForecast();
 	
 	var id = setInterval(function() {
 		ws.send('!P', function() {});
@@ -83,3 +99,4 @@ wss.on('connection', function(ws) {
 
 // Initialize services.
 sunset.restart();
+weather.initialize(true);

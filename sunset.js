@@ -93,4 +93,13 @@ sunset.current = function () {
 	}
 };
 
+/**
+ * Gets the current status of the lightbulb as a boolean.
+ * @return {bool} Whether or not the light should be on based on sunrise.
+ */
+sunset.getCurrent = function () {
+	var current = internal.currentTime();
+	return !(current > internal.sunrise && current < internal.sunset);
+}
+
 module.exports = sunset;

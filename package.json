@@ -5,6 +5,7 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "forecast": "^0.2.1",
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",
     "unirest": "^0.4.2",

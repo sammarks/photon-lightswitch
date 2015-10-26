@@ -4,7 +4,7 @@
 web:
     build: .
     env_file:
-    	- .env
+        - .env
     environment:
         VIRTUAL_HOST: photon-lightswitch.sammarks.me
     ports:
