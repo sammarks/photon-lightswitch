@@ -6,6 +6,20 @@ a lightswitch should be turned on or off.
 I offload the logic to this API to keep the script running on the photon as simple
 as possible.
 
+## Installation
+
+To install the Firmware, you'll need to load it into your Particle Build IDE, and then flash it to your
+Particle Photon. Be sure to update the comments marked as `TODO` with your connection details.
+
+To install the web service, you'll need to install and configure Docker and Docker Compose. Once that's done, copy
+the `.env.example` file to `.env` and fill in the values (the latitude, longitude, timezone and Forecast.IO API key).
+Save that file in the same directory as the `.env.example` file.
+
+When you're ready to get the web service up and running, just run `docker-compose build` to build the container, and
+then `docker-compose up -d` to run the service as a daemon. To view the logs, you can use `docker-compose logs`.
+
+Once the firmware and web service are working, the two should automatically attempt to establish a connection.
+
 ## Ideas
 
 Possible ideas I have for expansion:
