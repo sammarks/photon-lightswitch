@@ -7,7 +7,7 @@ Weather.config = {
 	latitude: 0,
 	longitude: 0,
 	timezone: '',
-	cloud_cover_threshold: 0.5,
+	cloud_cover_threshold: 0.7,
 	callbacks: {
 		statusChanged: function (on) {}
 	}
