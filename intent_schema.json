@@ -16,6 +16,10 @@
 		{
 			"intent": "LightswitchGoodmorning",
 			"slots": []
+		},
+		{
+			"intent": "RaveMode",
+			"slots": []
 		}
 	]
 }

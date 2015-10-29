@@ -4,7 +4,8 @@ var internals = {};
 Alexa.config = {
 	callbacks: {
 		on: function () {},
-		off: function () {}
+		off: function () {},
+		rave: function () {}
 	}
 };
 
@@ -34,6 +35,9 @@ Alexa.handle = function (request, response) {
 	} else if (name == 'LightswitchGoodnight') {
 		Alexa.config.callbacks.off();
 		output = 'Goodnight!';
+	} else if (name == 'RaveMode') {
+		Alexa.config.callbacks.rave();
+		output = 'BOOM TSH BOOM TSH BOOM TSH BOOM TSH BOOM TSH BOOM TSH';
 	}
 	response.json({
 		version: '1.0',
