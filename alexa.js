@@ -45,7 +45,7 @@ Alexa.handle = function (request, response) {
 			'oots oots oots oots oots oots oots oots'
 		];
 		var engine = Random.engines.mt19937().autoSeed();
-		output = outputs[Random.integer(0, outputs.length)(engine)];
+		output = outputs[Random.integer(0, outputs.length - 1)(engine)];
 	}
 	response.json({
 		version: '1.0',
