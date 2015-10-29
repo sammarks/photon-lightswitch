@@ -20,7 +20,9 @@ var config = {
 	forecast_io: process.env.FORECAST_IO_KEY,
 	alarm_max: 100, // The number of times to turn the lights on and off for an alarm.
 	alarm_time_min: 1000,
-	alarm_time_max: 3000
+	alarm_time_max: 3000,
+	rave_mode_interval: 500,
+	rave_mode_cycles: 20
 };
 
 // Configure sunset.
@@ -60,11 +62,12 @@ alarm.config.callbacks.alarm = function () {
 
 	// Process the alarm.
 	alarm_light_on = !alarm_light_on;
-	wss.broadcast(alarm_light_on ? '!Y' : '!N');
+	wss.broadcast(alarm_light_on ? '!F' : '!O');
 	alarm_count++;
 	if (alarm_count > config.alarm_max) {
 		alarm_count = 0;
 		alarm_light_on = false;
+		wss.reset();
 	} else {
 		var engine = Random.engines.mt19937().autoSeed();
 		setTimeout(alarm.config.callbacks.alarm, Random.integer(config.alarm_time_min, config.alarm_time_max)(engine));
@@ -78,6 +81,19 @@ alexa.config.callbacks.on = function () {
 }
 alexa.config.callbacks.off = function () {
 	wss.broadcast('!O');
+}
+alexa.config.callbacks.rave = function () {
+	var count = 0;
+	var on = false;
+	var id = setInterval(function () {
+		on = !on;
+		wss.broadcast(on ? '!F' : '!O');
+		count++;
+		if (count > config.rave_mode_cycles) {
+			clearInterval(id);
+			wss.reset();
+		}
+	}, config.rave_mode_interval);
 }
 
 // Configure the web service.
@@ -112,8 +128,7 @@ wss.on('connection', function(ws) {
 	console.log('Client connected.');
 
 	// Send the current sunset and weather status.
-	sunset.current();
-	weather.checkForecast(true);
+	wss.sendInitial();
 	
 	var id = setInterval(function() {
 		ws.send('!P', function() {});
@@ -125,6 +140,17 @@ wss.on('connection', function(ws) {
 	});
 
 });
+
+wss.reset = function () {
+	wss.broadcast('!Y');
+	wss.broadcast('!N');
+	wss.sendInitial();
+}
+
+wss.sendInitial = function () {
+	sunset.current();
+	weather.checkForecast(true);
+}
 
 // Initialize services.
 sunset.restart();
