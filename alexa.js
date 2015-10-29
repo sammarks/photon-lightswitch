@@ -1,3 +1,5 @@
+var Random = require('random-js');
+
 var Alexa = {};
 var internals = {};
 
@@ -37,7 +39,13 @@ Alexa.handle = function (request, response) {
 		output = 'Goodnight!';
 	} else if (name == 'RaveMode') {
 		Alexa.config.callbacks.rave();
-		output = 'boom tsh boom tsh boom tsh boom tsh boom tsh boom tsh';
+		outputs = [
+			'boom tsh boom tsh boom tsh boom tsh boom tsh boom tsh',
+			'turn down for what',
+			'oots oots oots oots oots oots oots oots'
+		];
+		var engine = Random.engines.mt19937().autoSeed();
+		output = outputs[Random.integer(0, outputs.length)(engine)];
 	}
 	response.json({
 		version: '1.0',
