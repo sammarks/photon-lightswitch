@@ -21,8 +21,8 @@ var config = {
 	alarm_max: 100, // The number of times to turn the lights on and off for an alarm.
 	alarm_time_min: 1000,
 	alarm_time_max: 3000,
-	rave_mode_interval: 500,
-	rave_mode_cycles: 20
+	rave_mode_interval: 250,
+	rave_mode_cycles: 40
 };
 
 // Configure sunset.
