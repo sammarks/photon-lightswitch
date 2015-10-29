@@ -37,7 +37,7 @@ Alexa.handle = function (request, response) {
 		output = 'Goodnight!';
 	} else if (name == 'RaveMode') {
 		Alexa.config.callbacks.rave();
-		output = 'BOOM TSH BOOM TSH BOOM TSH BOOM TSH BOOM TSH BOOM TSH';
+		output = 'boom tsh boom tsh boom tsh boom tsh boom tsh boom tsh';
 	}
 	response.json({
 		version: '1.0',
