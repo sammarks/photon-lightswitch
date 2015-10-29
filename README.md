@@ -20,6 +20,12 @@ then `docker-compose up -d` to run the service as a daemon. To view the logs, yo
 
 Once the firmware and web service are working, the two should automatically attempt to establish a connection.
 
+### Alarm Feature
+
+If you're going to use the alarm feature, it is very important that you set the `TZ` (timezone)
+environment variable correctly. If you do not set this, the alarm will go off at a different
+time than you're expecting!
+
 ## Ideas
 
 Possible ideas I have for expansion:
@@ -31,6 +37,7 @@ Possible ideas I have for expansion:
 	(on device, turns the lights out when my phone is not in the area).
 - [x] Update the application to use WebSockets [using this repository](https://github.com/hpssjellis/Particle-Spark-Core-Photon-Websocket-Hack).
 - [x] Create an Amazon Echo app to support turning the lights on and off by speaking to the Echo.
+- [x] Create an alarm feature that toggles the lights when I'm supposed to wake up in the morning.
 
 ## Device Codes
 

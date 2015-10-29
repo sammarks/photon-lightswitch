@@ -3,9 +3,11 @@ var WebSocketServer = require('ws').Server;
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var Random = require('random-js');
 var sunset = require('./sunset');
 var alexa = require('./alexa');
 var weather = require('./weather');
+var alarm = require('./alarm');
 var port = 8480;
 
 console.log('Starting...');
@@ -14,8 +16,11 @@ console.log('Starting...');
 var config = {
 	latitude: process.env.LATITUDE,
 	longitude: process.env.LONGITUDE,
-	timezone: process.env.TIMEZONE,
-	forecast_io: process.env.FORECAST_IO_KEY
+	timezone: process.env.TZ,
+	forecast_io: process.env.FORECAST_IO_KEY,
+	alarm_max: 100, // The number of times to turn the lights on and off for an alarm.
+	alarm_time_min: 1000,
+	alarm_time_max: 3000
 };
 
 // Configure sunset.
@@ -41,6 +46,30 @@ weather.config.callbacks.statusChanged = function (on) {
 	} else {
 		wss.broadcast('!N');
 	}
+}
+
+// Configure alarm.
+var alarm_count = 0;
+var alarm_light_on = false;
+alarm.config.callbacks.alarm = function () {
+
+	// Initial message.
+	if (alarm_count === 0) {
+		console.log('DING DING DING WE WOO WE WOO DING DING');
+	}
+
+	// Process the alarm.
+	alarm_light_on = !alarm_light_on;
+	wss.broadcast(alarm_light_on ? '!Y' : '!N');
+	alarm_count++;
+	if (alarm_count > config.alarm_max) {
+		alarm_count = 0;
+		alarm_light_on = false;
+	} else {
+		var engine = Random.engines.mt19937().autoSeed();
+		setTimeout(alarm.config.callbacks.alarm, Random.integer(config.alarm_time_min, config.alarm_time_max)(engine));
+	}
+	
 }
 
 // Configure alexa.
@@ -70,7 +99,7 @@ console.log("websocket server created");
 
 wss.broadcast = function(data) {
 	if (!this.clients || this.clients.length <= 0) {
-		console.log('No clients to broadcast to!');
+		console.log('No clients to broadcast %s to!', data);
 	}
 	for (var i in this.clients) {
 		this.clients[i].send(data);
@@ -100,3 +129,4 @@ wss.on('connection', function(ws) {
 // Initialize services.
 sunset.restart();
 weather.initialize(true);
+alarm.init();

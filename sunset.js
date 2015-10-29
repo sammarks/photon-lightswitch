@@ -7,7 +7,6 @@ var sunset = {};
 // Converts the given timezone to the current locale timezone
 // on the current date.
 internal.toLocaleTimezone = function (time, current) {
-	var date = new Date();
 	return moment.tz(time, 'hh:mm:ss A', 'UTC')
 		.month(current.month())
 		.day(current.day())
