@@ -85,6 +85,7 @@ alexa.config.callbacks.off = function () {
 alexa.config.callbacks.rave = function () {
 	var count = 0;
 	var on = false;
+	console.log('TURN DOWN FOR WHAT');
 	var id = setInterval(function () {
 		on = !on;
 		wss.broadcast(on ? '!F' : '!O');
