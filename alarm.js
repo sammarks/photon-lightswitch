@@ -5,9 +5,9 @@ Alarm.initialized = false;
 Alarm.ids = [];
 Alarm.config = {
 	alarms: [
-		'at 7:20am every Monday, Wednesday and Friday',
-		'at 7:50am every Tuesday',
-		'at 6:10am every Thursday'
+		'at 7:20 am on Monday, Wednesday and Friday',
+		'at 7:50 am on Tuesday',
+		'at 6:10 am on Thursday'
 	],
 	callbacks: {
 		alarm: function () {}
