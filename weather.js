@@ -29,23 +29,28 @@ Weather.initialize = function (check) {
 
 Weather.checkForecast = function (force) {
 	console.log('[weather] Checking Forecast');
-	Weather.forecast.get([Weather.config.latitude, Weather.config.longitude], function (err, weather) {
-		if (err) {
-			console.log('ERROR fetching weather data.');
-			console.dir(err);
-		} else if (typeof(weather['currently']) !== 'undefined' &&
-			typeof(weather['currently']['cloudCover']) !== 'undefined') {
-			console.log('Cloud Cover: %s', weather['currently']['cloudCover']);
-			var on = weather['currently']['cloudCover'] > Weather.config.cloud_cover_threshold;
-			if (on != Weather.previousState || force) {
-				Weather.previousState = on;
-				Weather.config.callbacks.statusChanged(on);
+	try {
+		Weather.forecast.get([Weather.config.latitude, Weather.config.longitude], function (err, weather) {
+			if (err) {
+				console.log('ERROR fetching weather data.');
+				console.dir(err);
+			} else if (typeof(weather['currently']) !== 'undefined' &&
+				typeof(weather['currently']['cloudCover']) !== 'undefined') {
+				console.log('Cloud Cover: %s', weather['currently']['cloudCover']);
+				var on = weather['currently']['cloudCover'] > Weather.config.cloud_cover_threshold;
+				if (on != Weather.previousState || force) {
+					Weather.previousState = on;
+					Weather.config.callbacks.statusChanged(on);
+				}
+			} else {
+				console.log('ERROR fetching weather data. Response schema incorrect.');
+				console.dir(err);
 			}
-		} else {
-			console.log('ERROR fetching weather data. Response schema incorrect.');
-			console.dir(err);
-		}
-	});
+		});
+	} catch (e) {
+		console.log('ERROR fetching weather data.');
+		console.dir(e);
+	}
 };
 
 module.exports = Weather;
