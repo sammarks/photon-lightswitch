@@ -115,12 +115,17 @@ var wss = new WebSocketServer({server: server});
 console.log("websocket server created");
 
 wss.broadcast = function(data) {
-	if (!this.clients || this.clients.length <= 0) {
-		console.log('No clients to broadcast %s to!', data);
-	}
-	for (var i in this.clients) {
-		this.clients[i].send(data);
-		console.log('sent to client[' + i + '] ' + data);
+	try {
+		if (!this.clients || this.clients.length <= 0) {
+			console.log('No clients to broadcast %s to!', data);
+		}
+		for (var i in this.clients) {
+			this.clients[i].send(data);
+			console.log('sent to client[' + i + '] ' + data);
+		}
+	} catch (e) {
+		console.log('ERROR sending message to clients.');
+		console.dir(e);
 	}
 }
 
