@@ -3,6 +3,7 @@
 
 web:
     build: .
+    restart: always
     env_file:
         - .env
     environment:
