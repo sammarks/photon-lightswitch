@@ -55,6 +55,10 @@ var alarm_count = 0;
 var alarm_light_on = false;
 alarm.config.callbacks.alarm = function () {
 
+	// Yeah, the alarm got pretty annoying when I didn't want
+	// to get up.
+	return;
+
 	// Initial message.
 	if (alarm_count === 0) {
 		console.log('DING DING DING WE WOO WE WOO DING DING');
