@@ -8,14 +8,14 @@ var sunset = {};
 // on the current date.
 internal.toLocaleTimezone = function (time, current) {
 	return moment.tz(time, 'hh:mm:ss A', 'UTC')
+		.tz(sunset.config.timezone)
 		.month(current.month())
-		.day(current.day())
-		.year(current.year())
-		.tz(sunset.config.timezone);
+		.date(current.date())
+		.year(current.year());
 }
 
 internal.currentTime = function () {
-	return moment.tz(new Date().getTime(), 'UTC').tz(sunset.config.timezone);
+	return moment.utc().tz(sunset.config.timezone);
 }
 
 sunset.config = {
@@ -45,6 +45,7 @@ sunset.restart = function () {
 			internal.tomorrow = current.clone().hours(0).minutes(0).seconds(0).add(1, 'day');
 
 			// Do some logging.
+			console.log("Current: %s", current);
 			console.log("Sunrise: %s", internal.sunrise);
 			console.log("Sunset: %s", internal.sunset);
 			console.log('-----------------');
